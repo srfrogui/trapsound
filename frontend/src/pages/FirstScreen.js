@@ -1,37 +1,45 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, Dimensions } from 'react-native';
+import { View, Text, Image, StyleSheet, Dimensions, useColorScheme } from 'react-native';
 
+import { colors } from '../themes/colors';
 import CustomButton from '../components/CustomButtom';
-import back from '../assets/im_black.png';
+import backDark from '../assets/im_black.png';
+import backLight from '../assets/im_light.png';
+
 
 const { width, height } = Dimensions.get('window');
 
 const FirstScreen = ({ navigation }) => {
+  const colorScheme = useColorScheme();
+  const theme = colorScheme === 'dark' ? 'dark' : 'light';
+  const themeColors = colors[theme];
+  const backgroundImage = theme === 'dark' ? backDark : backLight;
+
   return (
-    <View style={styles.homeDark}>
+    <View style={[styles.home, { backgroundColor: themeColors.background }]}>
       <View style={styles.image}>
-        <Image
-          style={styles.backgroundImage}
-          source={back}
-        />
+        <Image style={styles.backgroundImage} source={backgroundImage} />
       </View>
       <View style={styles.overlapGroup}>
         <View style={styles.containerText}>
-          <Text style={styles.textTop}>Um lugar para procurar colaboradores para suas músicas</Text>
+          <Text style={[styles.textTop, { color: themeColors.topTextColor }]}>
+            Um lugar para procurar colaboradores para suas músicas
+          </Text>
         </View>
-        <View style={styles.containerButton} >
-          <CustomButton
-            theme='dark'
+        <View style={styles.containerButton}>
+        <CustomButton
             title='Login'
-            type='outline'
-            textColor='#9B4AED'
+            buttonColor='white'
+            type={`outline 1 ${themeColors.buttonBackground}`}
+            textColor={themeColors.buttonBackground}
             onPress={() => navigation.navigate('Login')}
           />
-         <View style={styles.espacamento}></View>
+          <View style={styles.espacamento}></View>
           <CustomButton
-            theme='dark'
             title='Register'
+            buttonColor={themeColors.buttonBackground}
             type='cover'
+            textColor='white'
             onPress={() => navigation.navigate('Register')}
           />
         </View>
@@ -41,8 +49,7 @@ const FirstScreen = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  homeDark: {
-    backgroundColor: '#0d0d24',
+  home: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
@@ -58,34 +65,33 @@ const styles = StyleSheet.create({
     flex: 1,
     height: '100%',
     resizeMode: 'contain',
-},
+  },
   overlapGroup: {
-  flex: 1,
-  justifyContent: 'space-between',
-  paddingVertical: width > height ? 40 : 100,
-  maxWidth: width > height ? '60%' : '100%',
-  paddingHorizontal: 30,
-},
+    flex: 1,
+    justifyContent: 'space-between',
+    maxWidth: width > height ? '60%' : '100%',
+    paddingVertical: width > height ? 40 : 70,
+    paddingHorizontal: 0,
+  },
   containerText: {
-  display: 'flex',
-  flexDirection: 'row',
-  justifyContent: 'center',
-},
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+  },
   textTop: {
-  color: '#ffffff',
-  fontSize: 35,
-  fontWeight: '700',
-  textAlign: 'center',
-},
+    fontSize: 30,
+    fontWeight: '700',
+    textAlign: 'center',
+  },
   containerButton: {
-  height: '7%',
-  flexDirection: 'row',
-  justifyContent: 'center',
-  minHeight: 40,
-},
-espacamento: {
-  width: '10%',
-},
+    height: '7%',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    minHeight: 50,
+  },
+  espacamento: {
+    width: '10%',
+  },
 });
 
 export default FirstScreen;
