@@ -1,43 +1,37 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, Dimensions, useColorScheme } from 'react-native';
+import { View, Text, Image, StyleSheet, Dimensions } from 'react-native';
 
-import { colors } from '../themes/colors';
-import CustomButton from '../components/CustomButtom';
-import backDark from '../assets/im_black.png';
-import backLight from '../assets/im_light.png';
-
+import { useThemedStyles } from '../../themes/Colors';
+import CustomButton from '../../components/CustomButtom';
 
 const { width, height } = Dimensions.get('window');
 
 const FirstScreen = ({ navigation }) => {
-  const colorScheme = useColorScheme();
-  const theme = colorScheme === 'dark' ? 'dark' : 'light';
-  const themeColors = colors[theme];
-  const backgroundImage = theme === 'dark' ? backDark : backLight;
+  const { getBackgroundColor, getTextColor, getButtonBackgroundColor, getBackgroundImage } = useThemedStyles();
 
   return (
-    <View style={[styles.home, { backgroundColor: themeColors.background }]}>
+    <View style={[styles.home, { backgroundColor: getBackgroundColor() }]}>
       <View style={styles.image}>
-        <Image style={styles.backgroundImage} source={backgroundImage} />
+        <Image style={styles.backgroundImage} source={getBackgroundImage()} />
       </View>
       <View style={styles.overlapGroup}>
         <View style={styles.containerText}>
-          <Text style={[styles.textTop, { color: themeColors.topTextColor }]}>
+          <Text style={[styles.textTop, { color: getTextColor() }]}>
             Um lugar para procurar colaboradores para suas músicas
           </Text>
         </View>
         <View style={styles.containerButton}>
-        <CustomButton
+          <CustomButton
             title='Login'
             buttonColor='white'
-            type={`outline 1 ${themeColors.buttonBackground}`}
-            textColor={themeColors.buttonBackground}
+            type={`outline 1 ${getButtonBackgroundColor()}`}
+            textColor={getButtonBackgroundColor()}
             onPress={() => navigation.navigate('Login')}
           />
           <View style={styles.espacamento}></View>
           <CustomButton
             title='Register'
-            buttonColor={themeColors.buttonBackground}
+            buttonColor={getButtonBackgroundColor()}
             type='cover'
             textColor='white'
             onPress={() => navigation.navigate('Register')}
