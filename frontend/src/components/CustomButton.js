@@ -1,7 +1,7 @@
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 
-const CustomButton = ({ type = 'outline', title = 'Button', onPress, buttonColor = '#9B4AED', textColor = 'white', textStyle }) => {
+const CustomButton = ({ width = '100%', type = 'outline', title = 'Button', onPress, buttonColor = '#9B4AED', textColor = 'white', textStyle }) => {
     const [outlineWidth, outlineColor] = type.split(' ').slice(1);
     const borderWidth = parseInt(outlineWidth) || 1;
     const borderColor = outlineColor || '#9B4AED'; // Cor padrão para o tema escuro
@@ -11,7 +11,7 @@ const CustomButton = ({ type = 'outline', title = 'Button', onPress, buttonColor
 
     return (
         <TouchableOpacity
-            style={[styles.customBtnBG, { backgroundColor: buttonColor }, customTypeBG]}
+            style={[styles.customBtnBG, { backgroundColor: buttonColor, width }, customTypeBG]}
             onPress={onPress}>
             <Text style={{ ...styles.customBtnText, color: textColor, ...textStyle }}>{title}</Text>
         </TouchableOpacity>
@@ -23,13 +23,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center', 
         alignItems: 'center',
         borderRadius: 50,
-        height: '100%',
         maxHeight: '55px',
         maxWidth: '200px',
-        width: '43%',
     },
     customBtnText: {
-        
         fontSize: 20,
         textAlign: 'center',
     },

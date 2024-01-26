@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, Image, StyleSheet, Dimensions } from 'react-native';
 
 import { useThemedStyles } from '../../themes/Colors';
-import CustomButton from '../../components/CustomButtom';
+import CustomButton from '../../components/CustomButton';
 
 const { width, height } = Dimensions.get('window');
 
@@ -22,6 +22,7 @@ const FirstScreen = ({ navigation }) => {
         </View>
         <View style={styles.containerButton}>
           <CustomButton
+            width='43%'
             title='Login'
             buttonColor='white'
             type={`outline 1 ${getButtonBackgroundColor()}`}
@@ -30,6 +31,7 @@ const FirstScreen = ({ navigation }) => {
           />
           <View style={styles.espacamento}></View>
           <CustomButton
+            width='43%'
             title='Register'
             buttonColor={getButtonBackgroundColor()}
             type='cover'
@@ -76,7 +78,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: '700',
     textAlign: 'center',
-  },
+  },  
   containerButton: {
     height: '7%',
     flexDirection: 'row',

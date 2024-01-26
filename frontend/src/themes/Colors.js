@@ -13,6 +13,11 @@ export const useThemedStyles = () => {
     return colorScheme === 'dark' ? '#fff' : '#000';
   };
 
+  const getTextColorSQN = (opacity = 1) => {
+    const baseColor = colorScheme === 'dark' ? [0, 0, 0] : [255, 255, 255];
+    return `rgba(${baseColor.join(', ')}, ${opacity})`;
+  };  
+
   const getButtonBackgroundColor = () => {
     return colorScheme === 'dark' ? '#9B4AED' : '#21CE3D';
   };
@@ -24,6 +29,7 @@ export const useThemedStyles = () => {
   return {
     getBackgroundColor,
     getTextColor,
+    getTextColorSQN,
     getButtonBackgroundColor,
     getBackgroundImage,
     colorScheme,
